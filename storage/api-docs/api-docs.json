@@ -1,0 +1,253 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Swagger-Demo",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/cars": {
+            "get": {
+                "tags": [
+                    "Car"
+                ],
+                "summary": "Get list of all cars",
+                "operationId": "d8232bc6a16fec784f4a5fca541f9856",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Car"
+                ],
+                "summary": "Create new car",
+                "operationId": "724566c843f5b743f804f2be0147edde",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/cars/{id}/edit": {
+            "get": {
+                "tags": [
+                    "Car"
+                ],
+                "summary": "Get car data for edit",
+                "description": "Get car by id",
+                "operationId": "b060928a392fd49bae7c829bedf50a39",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Car id",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Car is not found"
+                    }
+                }
+            }
+        },
+        "/cars/{id}": {
+            "delete": {
+                "tags": [
+                    "Car"
+                ],
+                "summary": "Delete car",
+                "description": "Delete car by id",
+                "operationId": "cf5c2cc6a255c64c21681b2ace173caa",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Car id",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Car is not found"
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Car"
+                ],
+                "summary": "Update car data",
+                "description": "Update car by id",
+                "operationId": "3759d780595e1246f5a45c8d2955702c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Car id",
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CarRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Car is not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CarRequest": {
+                "properties": {
+                    "brand": {
+                        "description": "Автомобильная марка",
+                        "type": "string",
+                        "default": "Subaru",
+                        "enum": [
+                            "BMW",
+                            "Mersedes",
+                            "Audi",
+                            "Subaru",
+                            "Mitsubishi",
+                            "Nissan"
+                        ]
+                    },
+                    "model": {
+                        "description": "Модель автомобиля",
+                        "type": "string",
+                        "default": "Impreza WRX STI",
+                        "enum": [
+                            "E39",
+                            "E46",
+                            "C63",
+                            "Quattro S1",
+                            "R8",
+                            "Impreza WRX STI",
+                            "Legacy",
+                            "Lancer IX Evolution",
+                            "Lancer X",
+                            "Skyline GTR R34"
+                        ]
+                    },
+                    "year_issue": {
+                        "description": "Год выпуска",
+                        "type": "integer",
+                        "default": 1997,
+                        "example": 2007
+                    },
+                    "user_id": {
+                        "description": "Id пользователя, владеющий автомобилем",
+                        "type": "integer",
+                        "default": 1
+                    }
+                },
+                "type": "object"
+            },
+            "Car": {
+                "title": "Car",
+                "description": "Car model",
+                "required": [
+                    "brand",
+                    "model",
+                    "year_issue"
+                ],
+                "properties": {
+                    "fillable": {
+                        "description": "ID автомобиля",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "brand": {
+                        "description": "Автомобильная марка",
+                        "type": "string",
+                        "enum": [
+                            "BMW",
+                            "Mersedes",
+                            "Audi",
+                            "Subaru",
+                            "Mitsubishi",
+                            "Nissan"
+                        ]
+                    },
+                    "model": {
+                        "description": "Модель автомобиля",
+                        "type": "string",
+                        "enum": [
+                            "E39",
+                            "E46",
+                            "C63",
+                            "Quattro S1",
+                            "R8",
+                            "Impreza WRX STI",
+                            "Legacy",
+                            "Lancer IX Evolution",
+                            "Lancer X",
+                            "Skyline GTR R34"
+                        ]
+                    },
+                    "year_issue": {
+                        "description": "Год выпуска",
+                        "type": "integer",
+                        "example": [
+                            "2007",
+                            "1997"
+                        ]
+                    },
+                    "user_id": {
+                        "description": "Id пользователя, владеющий автомобилем",
+                        "type": "integer"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Car"
+                }
+            }
+        }
+    }
+}

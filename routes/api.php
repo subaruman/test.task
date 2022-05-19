@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\CarController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/cars')->group(function () {
@@ -11,7 +10,3 @@ Route::prefix('/cars')->group(function () {
     Route::patch('/{car}', [CarController::class, 'update'])->name('car.update');
     Route::delete('/{car}', [CarController::class, 'destroy'])->name('car.destroy');
 });
-
-
-Route::get('users/{user}/edit', [UserController::class, 'edit']);
-

@@ -10,19 +10,54 @@ use App\Models\Car;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Response as HttpResponse;
+use OpenApi\Annotations\OpenApi as OA;
 
 class CarController extends Controller
 {
     /**
-     * List of all cars
+     * @OA\Get(
+     *     path="/cars",
+     *     summary="Get list of all cars",
+     *     tags={"Car"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(
+     *             type="array",
+     *             @OA\Items(ref="#/definitions/Car"),
+     *         ),
+     *     )
+     * )
      */
-    public function index(Car $car): JsonResource
+    public function index(): JsonResource
     {
         return CarResource::collection(Car::paginate(10));
     }
 
     /**
-     * Create new car
+     * @OA\Post(
+     *     path="/cars",
+     *     summary="Create new car",
+     *     tags={"Car"},
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref="#/components/schemas/CarRequest",
+     *             )
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Successful operation",
+     *         @OA\Schema(ref="#/definitions/Car"),
+     *     ),
+     *     @OA\Response(
+     *         response="422",
+     *         description="Validation error",
+     *     )
+     * )
      */
     public function store(CarRequest $request): JsonResource
     {
@@ -30,7 +65,28 @@ class CarController extends Controller
     }
 
     /**
-     * Get car data for edit
+     * @OA\Get(
+     *     path="/cars/{id}/edit",
+     *     summary="Get car data for edit",
+     *     tags={"Car"},
+     *     description="Get car by id",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Car id",
+     *         required=true,
+     *         example=1,
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(ref="#/definitions/Car"),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Car is not found",
+     *     )
+     * )
      */
     public function edit(Car $car): JsonResource
     {
@@ -38,7 +94,41 @@ class CarController extends Controller
     }
 
     /**
-     * Update car data
+     * @OA\Patch(
+     *     path="/cars/{id}",
+     *     summary="Update car data",
+     *     tags={"Car"},
+     *     description="Update car by id",
+     *     @OA\RequestBody(
+     *         @OA\MediaType(
+     *             mediaType="application/x-www-form-urlencoded",
+     *             @OA\Schema(
+     *                 type="object",
+     *                 ref="#/components/schemas/CarRequest",
+     *             )
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Car id",
+     *         required=true,
+     *         example=1,
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\Schema(ref="#/definitions/Car"),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Car is not found",
+     *     ),
+     *     @OA\Response(
+     *         response="422",
+     *         description="Validation error",
+     *     ),
+     * )
      */
     public function update(Car $car, CarRequest $request): JsonResource
     {
@@ -48,7 +138,28 @@ class CarController extends Controller
     }
 
     /**
-     * Delete car
+     * @OA\Delete(
+     *     path="/cars/{id}",
+     *     summary="Delete car",
+     *     tags={"Car"},
+     *     description="Delete car by id",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="Car id",
+     *         required=true,
+     *         example=1,
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Successful operation",
+     *         @OA\Schema(ref="#/definitions/Car"),
+     *     ),
+     *     @OA\Response(
+     *         response="404",
+     *         description="Car is not found",
+     *     )
+     * )
      */
     public function destroy(Car $car): Response
     {

@@ -6,11 +6,13 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "darkaonline/l5-swagger": "^8.3",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
-        "predis/predis": "^1.1"
+        "predis/predis": "^1.1",
+        "zircote/swagger-php": "^4.4"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

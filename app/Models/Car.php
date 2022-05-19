@@ -5,10 +5,51 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use OpenApi\Annotations as OA;
 
+/**
+ * @OA\Schema(
+ *     title="Car",
+ *     description="Car model",
+ *     required={"brand", "model", "year_issue"},
+ *     @OA\Xml(
+ *         name="Car"
+ *     )
+ * )
+ */
 class Car extends Model
 {
     use HasFactory;
+    /**
+     * @OA\Property(
+     *     description="ID автомобиля",
+     *     example=1,
+     *     type="integer",
+     * )
+     * @OA\Property(
+     *      description="Автомобильная марка",
+     *      property="brand",
+     *      type="string",
+     *      enum={"BMW", "Mersedes", "Audi", "Subaru", "Mitsubishi", "Nissan"},
+     *  ),
+     * @OA\Property(
+     *      description="Модель автомобиля",
+     *      property="model",
+     *      type="string",
+     *      enum={"E39", "E46", "C63", "Quattro S1", "R8", "Impreza WRX STI", "Legacy", "Lancer IX Evolution", "Lancer X", "Skyline GTR R34"}
+     *  ),
+     * @OA\Property(
+     *      description="Год выпуска",
+     *      property="year_issue",
+     *      type="integer",
+     *      example={"2007", "1997"},
+     *  )
+     * @OA\Property(
+     *      description="Id пользователя, владеющий автомобилем",
+     *      property="user_id",
+     *      type="integer",
+     *  )
+     */
 
     protected $fillable = [
         'brand',

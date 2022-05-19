@@ -1,11 +1,9 @@
 <?php
 
 
-namespace Models;
-
 use PHPUnit\Framework\TestCase;
 
-class CarTest extends TestCase
+class ExampleTest extends TestCase
 {
     /**
      * A basic test example.
