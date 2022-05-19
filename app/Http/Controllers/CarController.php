@@ -16,18 +16,29 @@ class CarController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/cars",
+     *     path="/cars?page={page}",
      *     summary="Get list of all cars",
      *     tags={"Car"},
+     *     @OA\Parameter(
+     *         name="page",
+     *         in="path",
+     *         description="Page number",
+     *         example=1,
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Successful operation",
-     *         @OA\Schema(
-     *             type="array",
-     *             @OA\Items(ref="#/definitions/Car"),
-     *         ),
-     *     )
-     * )
+     *     ),
+     *     @OA\Schema(
+     *       schema="pagination",
+     *       @OA\Property(
+     *       property="page",
+     *       type="integer",
+     *       minimum=1
+     *       ),
+     *       ),
+     * ),
+     *
      */
     public function index(): JsonResource
     {

@@ -10,19 +10,29 @@
         }
     ],
     "paths": {
-        "/cars": {
+        "/cars?page={page}": {
             "get": {
                 "tags": [
                     "Car"
                 ],
                 "summary": "Get list of all cars",
-                "operationId": "d8232bc6a16fec784f4a5fca541f9856",
+                "operationId": "22f96f54f57a0a64641fb778e58f1b99",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": "Page number",
+                        "example": 1
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Successful operation"
                     }
                 }
-            },
+            }
+        },
+        "/cars": {
             "post": {
                 "tags": [
                     "Car"
